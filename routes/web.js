@@ -20,8 +20,6 @@ function initRoutes(app){
     /*-----------customers cart controller route-------------*/ 
     app.get('/cart', auth, cartController().cart)
     app.post('/upate-cart', auth, cartController().update)
-    app.post('/cart/option/one', cartController().optionOne)
-    app.post('/cart/option/two', cartController().optionTwo)
 
     /*-----------auth controller routes--------*/
     app.get('/registration', guest, authController().registration),

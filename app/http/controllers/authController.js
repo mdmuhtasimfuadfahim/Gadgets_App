@@ -1,21 +1,7 @@
-const multer = require('multer')
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const path = require('path')
 const passport = require('passport')
-
-/*------------image upload operation---------*/
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'public/img'),
-    filename: (req, file, cb) =>{
-        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-        cb(null, uniqueName)
-    }
-}) 
-
-let upload = multer({
-    storage,
-}).single('image')
 
 function authController(){
     const _getRedirectUrl = (req) =>{
@@ -56,7 +42,7 @@ function authController(){
                         return next(err)
                     }
 
-                    return res.redirect(_getRedirectUrl(req))
+                    return res.redirect('/')
                 })
             })(req, res, next)
         },
@@ -65,26 +51,14 @@ function authController(){
             res.render('auth/registration')
         },
 
-        postRegistration(req, res){
-            upload(req, res, async function (err) {
-            const { name, email, phone, address, password, image } = req.body
-            
-            if(err){
-                return res.status(500).send({ error: err.message})
-            }
-
-            if(!req.file){
-                return res.json({ error: 'Something Went Wrong'})
-            }
+        async postRegistration(req, res){
+            const { username, email, password } = req.body
             
             /*---------validate request--------*/ 
-            if(!name || !email || !phone ||!address || !password){
+            if(!username || !email || !password){
                 req.flash('error', 'All Fields are Required for Registration')
-                req.flash('name', name)
+                req.flash('username', username)
                 req.flash('email', email)
-                req.flash('phone', phone)
-                req.flash('address', address)
-                req.flash('password', password)
                 return res.redirect('/registration')
             }
 
@@ -92,38 +66,20 @@ function authController(){
             User.exists({email: email}, (err, result)=>{
                 if(result){
                     req.flash('error', 'This Email is Taken')
-                    req.flash('name', name)
+                    req.flash('username', username)
                     req.flash('email', email)
-                    req.flash('phone', phone)
-                    req.flash('address', address)
-                    req.flash('password', password)
                     return res.redirect('/registration')
                 }
             })
 
-            /*----------check if phone number exists-----------*/
-            User.exists({phone: phone}, (err, result)=>{
-                if(result){
-                    req.flash('error', 'This Contact Number is Already Exists')
-                    req.flash('name', name)
-                    req.flash('email', email)
-                    req.flash('phone', phone)
-                    req.flash('address', address)
-                    req.flash('password', password)
-                    return res.redirect('/registration')
-                }
-            })
 
             /*---------hash password----------*/
             const hashedPassword = await bcrypt.hash(password, 10)
 
             /*---------store user information into database--------*/
             const user = new User({
-                image: '/img/' + req.file.filename,
-                name: name,
+                username: username,
                 email: email,
-                phone: phone,
-                address: address,
                 password: hashedPassword
             }) 
 
@@ -136,8 +92,7 @@ function authController(){
                 console.log(err)
                 req.flash('error', 'Something went Wrong')
                 return res.redirect('/registration')
-            })
-        }) 
+            })     
         },
 
         logout(req, res){

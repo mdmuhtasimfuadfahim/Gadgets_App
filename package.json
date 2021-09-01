@@ -1,9 +1,9 @@
 {
-  "name": "arafat",
+  "name": "nabid",
   "version": "1.0.0",
-  "description": "This is a food delivery app",
+  "description": "This is a app for electronic gadgets",
   "main": "index.js",
-  "author": "arafat.0x",
+  "author": "nabid.0x",
   "scripts": {
     "dev": "nodemon server.js",
     "serve": "node server.js",
@@ -25,6 +25,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
+    "jQuery": "^1.7.4",
     "moment": "^2.29.1",
     "mongoose": "^5.13.7",
     "morgan": "^1.10.0",

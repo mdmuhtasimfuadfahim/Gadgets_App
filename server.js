@@ -11,7 +11,7 @@ const expressLayout = require('express-ejs-layouts')
 /*----------------
 define port number
 -----------------*/ 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 
 const session = require('express-session')
@@ -39,7 +39,7 @@ session store
 ------------*/ 
 const mongodbstore = new MongoDbStore({
     mongoUrl: process.env.MONGO_CONNECTION_URL,
-    dbName: "foodShop",
+    dbName: "gadgetsApp",
     stringify: false
 })
 
@@ -108,7 +108,7 @@ require('./routes/web')(app)
 
 
 const server = app.listen(PORT, () =>{
-    console.log(`Listening on port ${PORT}`)
+    console.log(`Webcome to Nabid's Server... port ${PORT}`)
 })
 
 

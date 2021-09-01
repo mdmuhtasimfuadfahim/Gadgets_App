@@ -1,137 +1,109 @@
-import { initAdmin } from './admin';
-import { addToCart } from './addToCart';
-import axios from 'axios';
-import noty from 'noty';
-import { initStripe } from './stripe'
+/*
+=============
+Navigation
+=============
+ */
 
-let menu = document.querySelector('#menu-bars');
-let navbar = document.querySelector('.navbar');
-// let footer = document.querySelector('.footer');
+import {productFunction} from './product';
+import {sliderFunction} from './slider';
+import {addToCart} from './addToCart';
 
-menu.onclick = () =>{
-  menu.classList.toggle('fa-times');
-  navbar.classList.toggle('active');
-}
+const navOpen = document.querySelector(".nav__hamburger");
+const navClose = document.querySelector(".close__toggle");
+const menu = document.querySelector(".nav__menu");
+const scrollLink = document.querySelectorAll(".scroll-link");
+const navContainer = document.querySelector(".nav__menu");
 
-let section = document.querySelectorAll('section');
-let navLinks = document.querySelectorAll('header .navbar a');
+navOpen.addEventListener("click", () => {
+  menu.classList.add("open");
+  document.body.classList.add("active");
+  navContainer.style.left = "0";
+  navContainer.style.width = "30rem";
+});
 
-window.onscroll = () =>{
+navClose.addEventListener("click", () => {
+  menu.classList.remove("open");
+  document.body.classList.remove("active");
+  navContainer.style.left = "-30rem";
+  navContainer.style.width = "0";
+});
 
-  menu.classList.remove('fa-times');
-  navbar.classList.remove('active');
-  
-  section.forEach(sec =>{
+/*
+=============
+PopUp
+=============
+ */
+const popup = document.querySelector(".popup");
+const closePopup = document.querySelector(".popup__close");
 
-    let top = window.scrollY;
-    let height = sec.offsetHeight;
-    let offset = sec.offsetTop - 150;
-    let id = sec.getAttribute('id');
-
-    if(top >= offset && top < offset + height){
-      navLinks.forEach(links =>{
-        links.classList.remove('active');
-        // footer.classList.remove('acitve');
-        document.querySelector('header .navbar a[href*='+id+']').classList.add('active');
-      });
-    };
-
+if (popup) {
+  closePopup.addEventListener("click", () => {
+    popup.classList.add("hide__popup");
   });
 
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      popup.classList.remove("hide__popup");
+    }, 500);
+  });
 }
 
-document.querySelector('#search-icon').onclick = () =>{
-  document.querySelector('#search-form').classList.toggle('active');
-}
+/*
+=============
+Fixed Navigation
+=============
+ */
 
-document.querySelector('#close').onclick = () =>{
-  document.querySelector('#search-form').classList.remove('active');
-}
+const navBar = document.querySelector(".navigation");
+const gotoTop = document.querySelector(".goto-top");
 
-var swiper = new Swiper(".home-slider", {
-  spaceBetween: 30,
-  centeredSlides: true,
-  autoplay: {
-    delay: 7500,
-    disableOnInteraction: false,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  loop:true,
+// Smooth Scroll
+Array.from(scrollLink).map(link => {
+  link.addEventListener("click", e => {
+    // Prevent Default
+    e.preventDefault();
+
+    const id = e.currentTarget.getAttribute("href").slice(1);
+    const element = document.getElementById(id);
+    const navHeight = navBar.getBoundingClientRect().height;
+    const fixNav = navBar.classList.contains("fix__nav");
+    let position = element.offsetTop - navHeight;
+
+    if (!fixNav) {
+      position = position - navHeight;
+    }
+
+    window.scrollTo({
+      left: 0,
+      top: position,
+    });
+    navContainer.style.left = "-30rem";
+    document.body.classList.remove("active");
+  });
 });
 
-var swiper = new Swiper(".review-slider", {
-  spaceBetween: 20,
-  centeredSlides: true,
-  autoplay: {
-    delay: 7500,
-    disableOnInteraction: false,
-  },
-  loop:true,
-  breakpoints: {
-    0: {
-        slidesPerView: 1,
-    },
-    640: {
-      slidesPerView: 2,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    1024: {
-      slidesPerView: 3,
-    },
-  },
+// Fix NavBar
+
+window.addEventListener("scroll", e => {
+  const scrollHeight = window.pageYOffset;
+  const navHeight = navBar.getBoundingClientRect().height;
+  if (scrollHeight > navHeight) {
+    navBar.classList.add("fix__nav");
+  } else {
+    navBar.classList.remove("fix__nav");
+  }
+
+  if (scrollHeight > 300) {
+    gotoTop.classList.add("show-top");
+  } else {
+    gotoTop.classList.remove("show-top");
+  }
 });
 
-function loader(){
-  document.querySelector('.loader-container').classList.add('fade-out');
-}
 
-function fadeOut(){
-  setInterval(loader, 2000);
-}
-
-window.onload = fadeOut;
-
-
-
-/*----------call addToCart.js file---------*/
+/*------call product function-------*/
+productFunction() 
+/*------call slider function--------*/
+sliderFunction() 
+/*------call add to cart function-----*/
 addToCart() 
-
-
-/*---------socket operation (real time)--------*/ 
-let socket = io() 
-
-/*--------Join-----------*/
-// if(order){
-//   socket.emit('join', `order_${order._id}`)
-// }
-
-let adminAreaPath = window.location.pathname
-
-if(adminAreaPath.includes('admin')){
-  /*----------call admin.js file-------------*/
-  initAdmin(socket) 
-  socket.emit('join', 'adminRoom')
-}
-
-
-/*----------call stripe.js file-----------*/
-initStripe()
-
-
-/*----------remove order success alert---------*/
-const alertMsg = document.querySelector('#success-alert')
-if(alertMsg){
-  setTimeout( () =>{
-    alertMsg.remove()
-  }, 2000)
-}
-
-
-
-
-

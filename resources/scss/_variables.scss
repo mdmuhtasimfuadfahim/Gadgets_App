@@ -1,33 +1,19 @@
-/*-------------
-variables color
--------------*/
-
-$green: #27ae60;
-$black: #192a56;
+$primaryColor: #f1f1f1;
+$black: #222;
+$black2: #555;
+$black3: #252525;
+$black4: #000;
+$black5: #212529;
+$orange: #eb0028;
 $white: #fff;
-$light-color: #666;
-$background: #eee;
-$box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+$grey: #959595;
+$grey2: #666;
+$grey3: #ccc;
+$secondaryColor: #2b1f4d;
+$yellow: #ffcc00;
+$green: #59b210;
+$blue: rgb(56, 10, 223);
 
-/*--------
-transition
----------*/
-
-$transition-smooth: all 0.2s linear;
-
-/*-----------
-border radius
-------------*/
 
 $menu-radius: 0.5rem;
 $border-radius: 50%;
-
-/*---------
-fixed size
----------*/
-
-$size: 4.5rem;
-$heading-font-1: 2.5rem;
-$heading-font-2: 1.7rem;
-$items-font: 7rem;
-$height: 5rem;

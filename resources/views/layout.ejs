@@ -1,36 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/css/app.css">
-    
-    <!-- swiper link -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Food Service</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+
+  <!-- Carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css
+">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Custom StyleSheet -->
+  <link rel="stylesheet" href="/css/app.css" />
+  <!-- Font Awesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <title>Phone Shop</title>
 </head>
-<body>
-    <!-- header section start -->
-    <header>
-        <a href="/" class="logo"><i class="fas fa-utensils"></i>Eat More</a>
-        <nav class="navbar">
-            <a class="active" href="#home">home</a>
-            <a href="#dishes">dishes</a>
-            <a href="#about">about</a>
-            <a href="#menu">menu</a>
-            <a href="#review">review</a>
-            <a href="#suggestion">suggestion</a>
-        </nav>
 
-        <div class="icons">
-            <i class="fas fa-bars" id="menu-bars"></i>
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="navigation">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav__hamburger">
+            <svg>
+              <use xlink:href="/img/sprite.svg#icon-menu"></use>
+            </svg>
+          </div>
+
+          <div class="nav__logo">
+            
+            <a href="/"><i class="fas fa-microscope"></i>ELECTRO</a>
+            <!-- <a href="/" class="scroll-link">
+              ELECTRO
+            </a> -->
+          </div>
+
+          <div class="nav__menu">
+            <div class="menu__top">
+              <span class="nav__category">PHONE</span>
+              <a href="#" class="close__toggle">
+                <svg>
+                  <use xlink:href="/img/sprite.svg#icon-cross"></use>
+                </svg>
+              </a>
+            </div>
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="#header" class="nav__link scroll-link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="#category" class="nav__link scroll-link">Category</a>
+              </li>
+              <!-- <li class="nav__item">
+                <a href="#news" class="nav__link scroll-link">Blog</a>
+              </li> -->
+              <li class="nav__item">
+                <a href="#contact" class="nav__link scroll-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="icons">
             <% if(user) { %>
                 <form id="logOut" action="/logout" method="POST"> </form>  
                     <a onclick="document.getElementById('logOut').submit()" href="#"><i class="fas fa-sign-out-alt"></i></a>
@@ -43,8 +84,6 @@
                 <a href="/login"><i class="fas fa-sign-in-alt"></i></a>
                 <a href="/registration"><i class="fas fa-user-plus"></i></a>
             <% } %>
-            <a class="fas fa-search" id="search-icon"></i>
-            <a href="/" class="fas fa-heart"></a>
             <% if(user) { %>
                 <% if(user.role === 'admin') { %>
                     <a href="/users"><i class="fas fa-user-tie"></i></a>
@@ -55,78 +94,141 @@
                 <% } %>
             <% } %>
         </div>
-    </header>
-    <!-- header section end -->
-
-    <!-- search form start -->
-    <form action="" id="search-form">
-        <input type="search" placeholder="search here..." name="" id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-        <i class="fas fa-times" id="close"></i>
-    </form>
-    <!-- search form end -->
-   
-    <!-- body section start -->
-    <%- body %>
-    <!-- body section end -->
-
-    <!-- footer section start -->
-    <section class="footer">
-
-        <div class="box-container">
-    
-            <div class="box">
-                <h3>locations</h3>
-                <a href="#">mirpur</a>
-                <a href="#">mohammadpur</a>
-                <a href="#">banani</a>
-                <a href="#">dhanmondi</a>
-                <a href="#">gulsan</a>
-                <a href="#">gazipur</a>
-            </div>
-    
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="#home">home</a>
-                <a href="#dishes">dishes</a>
-                <a href="#about">about</a>
-                <a href="#menu">menu</a>
-                <a href="#review">reivew</a>
-                <a href="#suggestion">suggestion</a>
-            </div>
-    
-            <div class="box">
-                <h3>contact info</h3>
-                <a href="#">+880 1780 139086</a>
-                <a href="#">+880 1537 220691</a>
-                <a href="#">arafat.kamal.cse@ulab.edu.bd</a>
-                <a href="#">arafat.kamal@gmail.com</a>
-                <a href="#">mirpur - 10, dhaka - 1216, bangladesh</a>
-            </div>
-    
-            <div class="box">
-                <h3>follow us</h3>
-                <a href="https://www.facebook.com/123.Arafat.kamal">facebook</a>
-                <a href="#">twitter</a>
-                <a href="#">instagram</a>
-                <a href="#">linkedin</a>
-            </div>
-    
-        </div>
-    
-        <div class="credit"> copyright @ 2021 by <span>arafat kamal chowdhury</span> </div>
-    
-    </section>
-    <!-- footer section end -->
-
-    <!-- loader part start -->
-    <div class="loader-container">
-        <img src="/img/loader.gif" alt="">
+        </nav>
+      </div>
     </div>
-    <!-- loader part end -->
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="/js/app.js"></script>
+    <!-- Hero -->
+
+  </header>
+  <!-- End Header -->
+
+  <!-- Body Start -->
+  <%- body %>
+  <!-- Body End -->
+
+
+  <!-- Footer -->
+  <footer id="footer" class="section footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer-top__box">
+          <h3>EXTRAS</h3>
+          <a href="#">Brands</a>
+          <a href="#">Gift Certificates</a>
+          <a href="#">Affiliate</a>
+          <a href="#">Specials</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-top__box">
+          <h3>INFORMATION</h3>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-top__box">
+          <h3>MY ACCOUNT</h3>
+          <a href="#">My Account</a>
+          <a href="#">Order History</a>
+          <a href="#">Wish List</a>
+          <a href="#">Returns</a>
+        </div>
+        <div class="footer-top__box">
+          <h3>CONTACT US</h3>
+          <div>
+            <span>
+              <svg>
+                <use xlink:href="/img/sprite.svg#icon-location"></use>
+              </svg>
+            </span>
+            Mirpur - 10, Dhaka - 1217, Bangladesh
+          </div>
+          <div>
+            <span>
+              <svg>
+                <use xlink:href="/img/sprite.svg#icon-envelop"></use>
+              </svg>
+            </span>
+            mahmudur.nabid@gmail.com
+          </div>
+          <div>
+            <span>
+              <svg>
+                <use xlink:href="/img/sprite.svg#icon-phone"></use>
+              </svg>
+            </span>
+            +880 1676 298877
+          </div>
+          <div>
+            <span>
+              <svg>
+                <use xlink:href="/img/sprite.svg#icon-paperplane"></use>
+              </svg>
+            </span>
+            Dream City, Dhaka
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer-bottom__box">
+
+      </div>
+      <div class="footer-bottom__box">
+
+      </div>
+    </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+ 
+  <!-- PopUp -->
+  <div class="popup hide__popup">
+    <div class="popup__content">
+      <div class="popup__close">
+        <svg>
+          <use xlink:href="/img/sprite.svg#icon-cross"></use>
+        </svg>
+      </div>
+      <div class="popup__left">
+        <div class="popup-img__container">
+          <img class="popup__img" src="/img/pic-2.jpg" alt="popup">
+        </div>
+      </div>
+      <div class="popup__right">
+        <div class="right__content">
+          <h1>Get Discount <span>30%</span> Off</h1>
+          <p>Sign up to our newsletter and save 30% for you next purchase. No spam, we promise!
+          </p>
+          <form action="#">
+            <input type="email" placeholder="Enter your email..." class="popup__form">
+            <a href="#">Subscribe</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Go To -->
+
+  <a href="#header" class="goto-top scroll-link">
+    <svg>
+      <use xlink:href="/img/sprite.svg#icon-arrow-up"></use>
+    </svg>
+  </a>
+
+
+  <!-- Glide Carousel Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+  <!-- Animate On Scroll -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Custom JavaScript -->
+
+  <script src="/js/app.js"></script>
+
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-const Menu = require('../../models/menu')
+const Product = require('../../models/product')
 const User = require('../../models/user')
 const moment = require('moment')
 
@@ -6,11 +6,12 @@ function homeController(){
     return{
         async index(req, res) {
 
-            const menus = await Menu.find()
-            return res.render('home', {menus: menus})
-            // Menu.find().then((menus)=>{
-            //     console.log(menus)
-            //     res.render('home', {menus: menus})
+            const product = await Product.find()
+            return res.render('home', {product: product})
+
+            // Product.find().then((Products)=>{
+            //     console.log(Products)
+            //     res.render('home', {Products: Products})
             // })
             
         },

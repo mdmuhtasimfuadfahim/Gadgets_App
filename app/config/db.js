@@ -7,7 +7,7 @@ function connectDB(){
     mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology:true, useFindAndModify: true});
     const connection = mongoose.connection;
     connection.once('open', ()=>{
-        console.log('MongoDB connected successfully...');
+        console.log(`Nabid database connected on port 5000`);
     }).catch(err =>{
         console.log('Connection failed...')
     });
