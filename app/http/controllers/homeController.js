@@ -14,12 +14,6 @@ function homeController(){
             //     res.render('home', {Products: Products})
             // })
             
-        },
-
-        async customers(req, res){
-            const users = await User.find()
-            console.log(users)
-            return res.render('admin/users', {users: users, moment: moment})
         }
     }
 }

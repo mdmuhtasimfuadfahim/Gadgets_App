@@ -7,11 +7,7 @@ const orderSchema = new Schema({
         ref: 'User',
         required: true
     },
-    menus:{type: Object, required: true},
-    phone:{type: String, required: true},
-    address:{type: String, required: true},
-    paymentType:{type: String, default: 'COD'},
-    paymentStatus: {type: Boolean, default: false},
+    product:{type: Object, required: true},
     status: { type: String, default: 'order_placed'}
 },{timestamps: true})
 

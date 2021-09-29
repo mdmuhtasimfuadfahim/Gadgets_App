@@ -2,6 +2,22 @@ const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const path = require('path')
 const passport = require('passport')
+const multer = require('multer')
+
+
+/*----------image uploader------------*/
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'public/img'),
+    filename: (req, file, cb)=>{
+        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
+        cb(null, uniqueName)
+    }
+})
+
+
+let upload = multer({
+    storage,
+}).single('image')
 
 function authController(){
     const _getRedirectUrl = (req) =>{
@@ -51,14 +67,21 @@ function authController(){
             res.render('auth/registration')
         },
 
-        async postRegistration(req, res){
-            const { username, email, password } = req.body
+        postRegistration(req, res){
+            upload(req, res, async function(err){
+                const { image, username, email, phone, address, password } = req.body
             
+                if(!req.file){
+                    req.flash('error', 'You have to upload your image')
+                    return res.redirect('/registration')
+                }
             /*---------validate request--------*/ 
-            if(!username || !email || !password){
+            if(!username || !email || !phone ||!address || !password){
                 req.flash('error', 'All Fields are Required for Registration')
                 req.flash('username', username)
+                req.flash('phone', phone)
                 req.flash('email', email)
+                req.flash('address', address)
                 return res.redirect('/registration')
             }
 
@@ -68,6 +91,20 @@ function authController(){
                     req.flash('error', 'This Email is Taken')
                     req.flash('username', username)
                     req.flash('email', email)
+                    req.flash('phone', phone)
+                    req.flash('address', address)
+                    return res.redirect('/registration')
+                }
+            })
+
+            /*----------check if phone number exists-----------*/
+            User.exists({phone: phone}, (err, result)=>{
+                if(err){
+                    req.flash('error', 'This Conatct is in use')
+                    req.flash('username', username)
+                    req.flash('email', email)
+                    req.flash('phone', phone)
+                    req.flash('address', address)
                     return res.redirect('/registration')
                 }
             })
@@ -78,8 +115,11 @@ function authController(){
 
             /*---------store user information into database--------*/
             const user = new User({
+                image: '/img/' + req.file.filename,
                 username: username,
                 email: email,
+                phone: phone,
+                address: address,
                 password: hashedPassword
             }) 
 
@@ -89,10 +129,11 @@ function authController(){
                 req.flash('success', 'Registation done Successfully')
                 return res.redirect('/')
             }).catch(err =>{
-                console.log(err)
                 req.flash('error', 'Something went Wrong')
                 return res.redirect('/registration')
-            })     
+            })
+            })
+                 
         },
 
         logout(req, res){

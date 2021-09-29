@@ -36,6 +36,41 @@ function cartController(){
             cart.totalPrice = cart.totalPrice + req.body.price
         }
        return res.json({totalQty: req.session.cart.totalQty})
+    },
+    async delete(req, res){
+        const id = req.params.id
+     
+       
+        let cart = req.session.cart
+        let productQuantity = cart.product[id].qty
+        let productPrice = cart.product[id].product.price
+        let productTotalPrice = productQuantity * productPrice
+        cart.totalQty = cart.totalQty - productQuantity
+        cart.totalPrice = cart.totalPrice - parseInt(productTotalPrice)
+        delete req.session.cart.product[id]
+        res.render('customers/cart')
+    },
+    minusProduct(req, res){
+        const id = req.params.id
+
+        let cart = req.session.cart
+        cart.product[id].qty = cart.product[id].qty - 1
+        let productPrice = cart.product[id].product.price 
+        cart.totalQty = cart.totalQty - 1
+        cart.totalPrice = cart.totalPrice - productPrice
+
+        res.render('customers/cart')
+    },
+    plusProduct( req, res){
+        const id = req.params.id
+
+        let cart = req.session.cart
+        cart.product[id].qty = cart.product[id].qty + 1
+        let productPrice = cart.product[id].product.price 
+        cart.totalQty = cart.totalQty + 1
+        cart.totalPrice = cart.totalPrice + productPrice
+
+        res.render('customers/cart')
     }
  }
 }

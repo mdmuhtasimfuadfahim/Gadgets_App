@@ -1,0 +1,36 @@
+<div class="profiles_wrapper">
+
+  <% users.forEach(function(user) { %>
+    <div class="profiles_container">
+      <img src="<%= user.image %>" alt="" class="profile-img">
+      
+      <div class="profiles_content">
+        <div class="sub-content">
+          <h1><%= user.username %></h1>
+          <span><%= user.phone %></span>
+          <p><%= user.role %></p>
+          <span class="location"><i class="fa fa-map-marker" aria-hidden="true"></i><%= user.address %></span>
+          <a href="<%= user.email %>"><%= user.email %></a>
+          <p>Rg. Date: <%= moment(user.createdAt).format('DD:MM:YYYY') %></p>
+        </div>
+        <div class="profiles_data">
+          <div class="inner-data">
+            <span><i class="fab fa-jedi-order"></i></span>
+            <p>Orders</p>
+          </div>
+
+          <div class="inner-data">
+            <span><i class="fas fa-user-tag"></i></span>
+            <p>Discount</p>
+          </div>
+         
+          <div class="inner-data">
+            <span><i class="fas fa-user-minus"></i></span>
+            <p>Action</p>
+          </div>
+        </div> 
+      </div>
+
+    </div>
+  <% }) %>
+</div>

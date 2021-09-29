@@ -1,0 +1,27 @@
+
+<div class="profile_container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card p-3 py-4">
+                <div class="text-center image_tag"><img src="<%= user.image %>" width="100"> </div>
+                <div class="text-center mt-3">
+                    <h2 class="mt-2 mb-0 name_class"><%= user.username %></h2> <span><%= user.role %></span>
+                    <div class="px-4 mt-1">
+                        <p class="fonts"><%= user.email %></p>
+                        <p class="fonts"><%= user.phone %></p>
+                        <p class="fonts"><%= user.address %></p>
+                    </div>
+                    <ul class="social-list">
+                        <li><i class="fab fa-facebook-square"></i></li>
+                        <li><i class="fab fa-instagram-square"></i></li>
+                        <li><i class="fab fa-linkedin"></i></li>
+                        <li><i class="fab fa-google-plus-square"></i></li>
+                    </ul>
+                    <a href="/customer/edit_form?id=<%= user._id %>" class="product__btn">Edit My Data</a>
+                
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

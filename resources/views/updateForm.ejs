@@ -1,0 +1,39 @@
+<div class="update_form_content mt-20 mb-20 py-20">
+    <div class="ml-20 update_form_container py-20">
+        
+            <form id="update_form" method="POST">
+
+                <div class="row">
+                    <h4 class="mb-10">Profile Update Form</h4>
+                    <div class="input-group input-group-icon mt-10">
+                        <input type="hidden" name="id" value="<%= profile._id %>">
+                        <input type="text" name="username" value="<%= profile.username %>" placeholder="your name">
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="email" value="<%= profile.email %>" placeholder="your email">
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="address" value="<%= profile.address %>" placeholder="your address">
+                        <span class="input-icon">
+                            <i class="fas fa-street-view"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="phone" value="<%= profile.phone %>" placeholder="your contact">
+                        <span class="input-icon">
+                            <i class="fas fa-mobile"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <button type="submit" class="hero__btn update">Submit Form</button>
+                <a class="float-right mt-10 text-2xl" href="/customer/profile">Go Back</a>
+            </form>
+        </div>
+    </div>

@@ -1,22 +1,94 @@
-<section class="orders">
-    <div class="admin-order-container mx-auto pt-12">
-        <h1 class="fas fas fa-utensils heading py-16">Customers Order</h1>
-            <table class="admin-order-table w-full mx-auto table-auto">
-                <thead>
+<section class="orders light-section mb-20">
+    <div class="mx-auto pt-12">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="fas fa-microscope font-bold text-3xl mb-4">Orders of Customer</h1>
+        </div>
+
+        <table class="customerT mx-auto table-auto bg-white">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-center">Image</th>
+                    <th class="px-4 py-2 text-center">Orders</th>
+                    <th class="px-4 py-2 text-center">Name</th>
+                    <th class="px-4 py-2 text-center">Contact</th>
+                    <th class="px-4 py-2 text-center">Email</th>
+                    <th class="px-4 py-2 text-center">Address</th>
+                    <th class="px-4 py-2 text-center">Placed Time</th>
+                    <th class="px-4 py-2 text-center">Placed Date</th>
+                    <th class="px-4 py-2 text-center">Payment Status</th>
+                    <th class="px-4 py-2 text-center">Status</th>
+                </tr>
+            </thead>
+            <%
+            function renderOrderItems(product) {
+               let parsedItems = Object.values(product)
+                return parsedItems.map((menuItem) => {
+                return `
+                     ${ menuItem.product.title } - ${ menuItem.qty }
+                `
+             }).join('')
+             }
+             %>
+            <tbody>
+                <% if(orders.length) { %>
+                    <% orders.forEach((order)=>{ %>
+                        <tr>
+                            <td class="border px-4 py-2"><img style="border-radius: 5px" height="50px" width="45px" src="<%= order.customerId.image %>" alt="image"></td>
+                            <td class="mx-auto border px-4 py-2 text-center">
+                                <p class="text-green-900"><%= order._id %></p>
+                                <div><%= renderOrderItems(order.product) %></div>
+                            </td>
+                            <td class="border px-4 py-2 text-center"><%= order.customerId.username %></td>
+                            <td class="border px-4 py-2 text-center"><%= order.customerId.phone %></td>
+                            <td class="border px-4 py-2 text-center"><%= order.customerId.email %></td>               
+                            <td class="border px-4 py-2 text-center"><%= order.customerId.address %></td>
+                            <td class="border px-4 py-2 text-center">
+                                <%= moment(order.createdAt).format('hh:mmA') %>
+                            </td>
+                            <td class="border px-4 py-2 text-center">
+                                <%= moment(order.createdAt).format('DD:MM:YYYY') %>
+                            </td>
+                            <td class="border px-4 py-2 text-center">
+                                Not Paid
+                            </td>
+                            <% if(order.status === 'order_placed') { %>
+                            <td class="border px-4 py-2 text-center">
+                                <div class="inline-block relative w-64 text-center">
+                                    <form action="/admin/status" method="POST">
+                                        <input type="hidden" name="orderId" value="<%= order._id %>">
+                                        <button name="status" onchange="this.form.submit()" value='completed'
+                                            class="btn"><span class="text_gradient"><i class="far fa-times-circle"></i>
+                                        </button>
+                                    </form>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </td>
+                            <% } else { %>
+                                <td class="border px-4 py-2 text-center">
+                                    <button class="btn"><span class="text_gradient_tick"><i class="far fa-check-circle"></i>
+                                    </button>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% }) %>
+                
+                <% } else { %>
                     <tr>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Image</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Orders</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Customers Contact</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Customers Email</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Customers Address</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Order Status</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Placed Time</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Placed Date</th>
-                          <th class="order-header text-2xl px-4 py-2 text-left">Payment Status</th>
-                    </tr>  
-                </thead>
-                <tbody id="orderTableBody">
-                </tbody>
-            </table>
+                        <td class="p-4">No orders found</td>
+                    </tr>
+                <% } %>
+            </tbody>
+            
+        </table>
+
+        
     </div>
+
 </section>

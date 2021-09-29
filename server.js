@@ -105,10 +105,12 @@ app.set('view engine', 'ejs')
 routing control
 --------------*/ 
 require('./routes/web')(app)
-
+app.use((req, res) =>{
+    res.status(404).render('error/404')
+})
 
 const server = app.listen(PORT, () =>{
-    console.log(`Webcome to Nabid's Server... port ${PORT}`)
+    console.log(`Welcome to Nabid's Server... port ${PORT}`)
 })
 
 

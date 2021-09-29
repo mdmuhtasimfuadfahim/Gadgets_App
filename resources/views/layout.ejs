@@ -10,7 +10,9 @@
 
   <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 
-
+  <!-- Tailwind CSS -->
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  
   <!-- Carousel -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css
@@ -21,6 +23,9 @@
   <link rel="stylesheet" href="/css/app.css" />
   <!-- Font Awesome CDN Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Bootstrap -->
+  
 
   <title>Phone Shop</title>
 </head>
@@ -62,12 +67,23 @@
               <li class="nav__item">
                 <a href="#category" class="nav__link scroll-link">Category</a>
               </li>
-              <!-- <li class="nav__item">
-                <a href="#news" class="nav__link scroll-link">Blog</a>
-              </li> -->
               <li class="nav__item">
                 <a href="#contact" class="nav__link scroll-link">Contact</a>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+            <% if(user){ %>
+              <% if(user.role === "customer"){ %>
+                <a class="mr-5" href="/customer/orders">Orders</a>
+                <a class="ml-5" href="/customer/profile">My Profile</a>
+              <% } else { %>
+                <a class="mr-5" href="/admin/orders">Orders</a>
+                <a class="ml-5" href="/admin/profile">My Profile</a>  
+              <% } %>
+            <% } %>
             </ul>
           </div>
 
@@ -75,18 +91,13 @@
             <% if(user) { %>
                 <form id="logOut" action="/logout" method="POST"> </form>  
                     <a onclick="document.getElementById('logOut').submit()" href="#"><i class="fas fa-sign-out-alt"></i></a>
-                <% if(user.role === 'admin') { %>
-                    <a href="/admin/orders"><i class="fas fa-box"></i></a>
-                <% } else { %>
-                    <a href="/customer/orders"><i class="fas fa-box"></i></a>
-                <% } %>
             <% } else { %>    
                 <a href="/login"><i class="fas fa-sign-in-alt"></i></a>
                 <a href="/registration"><i class="fas fa-user-plus"></i></a>
             <% } %>
             <% if(user) { %>
                 <% if(user.role === 'admin') { %>
-                    <a href="/users"><i class="fas fa-user-tie"></i></a>
+                    <a href="/customer/profiles/view"><i class="fas fa-user-tie"></i></a>
                 <% } else { %>
                     <a href="/cart" class="fas fa-shopping-cart">
                         <span id="cartCounter"><%= session.cart ? session.cart.totalQty : '' %></span>
@@ -225,8 +236,11 @@
   <!-- Animate On Scroll -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+ 
+  <!-- Socket Connection -->
+  <script src="/socket.io/socket.io.js"></script>
+  
   <!-- Custom JavaScript -->
-
   <script src="/js/app.js"></script>
 
 </body>

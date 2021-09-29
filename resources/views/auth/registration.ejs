@@ -1,7 +1,7 @@
     <!-- registration section start -->
     <section class="login_container py-20" >
 
-        <form action="/registration" method="POST">
+        <form action="/registration" method="POST" enctype="multipart/form-data">
             <div class="links">
                 <h3 class="title">Sign in with</h3>
                 <div class="buttons">
@@ -12,17 +12,29 @@
 
             <div class="input-box">
                 
-                <h3 class="title">or Sign up with username, email & password</h3>
+                <h3 class="title">or Sign up with following information</h3>
                 <% if(messages.error) { %>
                    <span class="textshow"><%= messages.error %></span>
                 <% } %>
                 <div class="input">
+                    <span class="fas fa-image"></span>
+                    <input id="image" name="image" type="file">
+                </div>
+                <div class="input">
                     <span class="fas fa-user"></span>
-                    <input id="username" name="username" type="text" placeholder="enter email">
+                    <input id="username" name="username" type="text" value="<%= messages.username %>" placeholder="enter username">
                 </div>
                 <div class="input">
                     <span class="far fa-envelope"></span>
-                    <input id="email" name="email" type="email" placeholder="enter email">
+                    <input id="email" name="email" type="email" value="<%= messages.email %>" placeholder="enter email">
+                </div>
+                <div class="input">
+                    <span class="fas fa-phone"></span>
+                    <input id="phone" name="phone" type="text" value="<%= messages.phone %>" placeholder="enter contact">
+                </div>
+                <div class="input">
+                    <span class="fas fa-map-marker-alt"></span>
+                    <input id="address" name="address" type="text" value="<%= messages.address %>" placeholder="enter address">
                 </div>
                 <div class="input">
                     <span class="fas fa-lock"></span>

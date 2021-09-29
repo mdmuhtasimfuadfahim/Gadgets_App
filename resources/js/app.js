@@ -1,12 +1,11 @@
-/*
-=============
-Navigation
-=============
- */
-
+import jQuery from 'jquery'
+window.$ = window.jQuery = jQuery
 import {productFunction} from './product';
 import {sliderFunction} from './slider';
 import {addToCart} from './addToCart';
+import {updateDeleteOperation} from './deleteCartOperation';
+import {updateCustomerProfile} from './updateCustomerProfile';
+
 
 const navOpen = document.querySelector(".nav__hamburger");
 const navClose = document.querySelector(".close__toggle");
@@ -36,7 +35,7 @@ PopUp
 const popup = document.querySelector(".popup");
 const closePopup = document.querySelector(".popup__close");
 
-if (popup) {
+if (window.location.pathname === '/') {
   closePopup.addEventListener("click", () => {
     popup.classList.add("hide__popup");
   });
@@ -49,9 +48,9 @@ if (popup) {
 }
 
 /*
-=============
+================
 Fixed Navigation
-=============
+================
  */
 
 const navBar = document.querySelector(".navigation");
@@ -101,9 +100,59 @@ window.addEventListener("scroll", e => {
 });
 
 
-/*------call product function-------*/
+/*
+=====================
+Call Product Function
+=====================
+*/
 productFunction() 
-/*------call slider function--------*/
+
+
+/*
+====================
+Call Slider Function
+====================
+*/
 sliderFunction() 
-/*------call add to cart function-----*/
+
+
+/*
+=========================
+Call Add to Cart Function
+=========================
+*/
 addToCart() 
+
+/*--------- Remove Alert---------*/
+const alertMsg = document.querySelector('#success-alert')
+if(alertMsg){
+    setTimeout(()=>{
+        alertMsg.remove()
+    },2000)
+}
+
+/*
+===========================
+Call Cart Operation Function
+============================
+*/ 
+updateDeleteOperation()
+
+
+/*
+=====================================
+Call Customer Profile Update Function
+=====================================
+*/ 
+updateCustomerProfile()
+
+// /*---------socket operation (real time)--------*/ 
+// let socket = io() 
+// /*------call admin order function-------*/
+// let adminAreaPath = window.location.pathname
+
+// if(adminAreaPath.includes('admin')){
+//   /*----------call admin.js file-------------*/
+//   initAdmin(socket) 
+//   socket.emit('join', 'adminRoom')
+// } 
