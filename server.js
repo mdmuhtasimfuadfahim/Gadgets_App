@@ -110,7 +110,7 @@ app.use((req, res) =>{
 })
 
 const server = app.listen(PORT, () =>{
-    console.log(`Welcome to Nabid's Server... port ${PORT}`)
+    console.log(`Welcome to My Server... port ${PORT}`)
 })
 
 

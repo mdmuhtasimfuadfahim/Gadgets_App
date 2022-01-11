@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "5e4e66cfa2c166807cf2bea7"
+  },
+  "id": 10,
+  "title": "Apple iPhone 11 Pro",
+  "image": "/img/products/iphone/iphone5.jpeg",
+  "price": 385,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "5e5e66eea26a66807cf2bea8"
+  },
+  "id": 11,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone6.jpeg",
+  "price": 475,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "7265e992ea26a66807cf2b58"
+  },
+  "id": 13,
+  "title": "Apple iPhone 11",
+  "image": "/img/products/iphone/iphone6.jpeg",
+  "price": 800,
+  "category": "Trending Products"
+},{
+  "_id": {
+    "$oid": "5eee6727a27a66807cf2bea9"
+  },
+  "id": 12,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone7.jpeg",
+  "price": 850,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "5eee6737a47a66807cf1cea9"
+  },
+  "id": 14,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone7.jpeg",
+  "price": 360,
+  "category": "Trending Products"
+},{
+  "_id": {
+    "$oid": "5e2e2717a27a77807cf2bea9"
+  },
+  "id": 9,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone5.jpeg",
+  "price": 320,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "52236727a27a66807cf2bca0"
+  },
+  "id": 15,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone8.jpeg",
+  "price": 305,
+  "category": "Trending Products"
+},{
+  "_id": {
+    "$oid": "65ae3717a27b66807cf2bea2"
+  },
+  "id": 16,
+  "title": "Samsung Galaxy",
+  "image": "/img/products/sumsung/samsung6.jpeg",
+  "price": 400,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "234e3717a27b66807cf2bea2"
+  },
+  "id": 17,
+  "title": "Samsung Galaxy",
+  "image": "/img/products/sumsung/samsung5.jpeg",
+  "price": 550,
+  "category": "Trending Products"
+},{
+  "_id": {
+    "$oid": "812e3717a27b66807cf2b770"
+  },
+  "id": 2,
+  "title": "Apple iPhone 11",
+  "image": "/img/products/iphone/iphone1.jpeg",
+  "price": 300,
+  "category": "Special Products"
+},{
+  "_id": {
+    "$oid": "4e123717a27b66807cf2bea2"
+  },
+  "id": 19,
+  "title": "Sony WH-CH510",
+  "image": "/img/products/headphone/headphone10.jpeg",
+  "price": 250,
+  "category": "Trending Products"
+}]
