@@ -105,9 +105,9 @@ app.set('view engine', 'ejs')
 routing control
 --------------*/ 
 require('./routes/web')(app)
-app.use((req, res) =>{
-    res.status(404).render('error/404')
-})
+// app.use((req, res) =>{
+//     res.status(404).render('error/404')
+// })
 
 const server = app.listen(PORT, () =>{
     console.log(`Welcome to My Server... port ${PORT}`)
